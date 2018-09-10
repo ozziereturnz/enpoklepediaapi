@@ -20,6 +20,7 @@ namespace EnpoklepediaAPI.Controllers
 
 		// GET api/pokemon
 		[HttpGet]
+		[Route("api/pokemon")]
 		public List<Pokemon> Get()
 		{
 			return _ctx.Pokemon.ToList();
@@ -27,6 +28,7 @@ namespace EnpoklepediaAPI.Controllers
 
 		// GET api/pokemon/number
 		[HttpGet]
+		[Route("api/pokemon/{number}")]
 		public Pokemon Get(int number)
 		{
 			return _ctx.Pokemon.FirstOrDefault(p => p.Number == number);
