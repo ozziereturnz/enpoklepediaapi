@@ -1,0 +1,6 @@
+.vs/
+EnpoklepediaAPI/bin/
+EnpoklepediaAPI/obj/
+EnpoklepediaAPI.Tests/bin/
+EnpoklepediaAPI.Tests/obj/
+packages/
