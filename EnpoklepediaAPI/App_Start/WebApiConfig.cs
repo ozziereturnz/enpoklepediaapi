@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Common;
+using System.Data.Entity.Core.EntityClient;
 using System.Linq;
 using System.Web.Http;
+using EnpoklepediaAPI.Controllers;
+using EnpoklepediaAPI.Models;
 
 namespace EnpoklepediaAPI
 {
@@ -10,6 +15,10 @@ namespace EnpoklepediaAPI
 		public static void Register(HttpConfiguration config)
 		{
 			// Web API configuration and services
+			EnpoklepediaContext ctx = new EnpoklepediaContext(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_enpoklepedia"));
+
+			config.DependencyResolver = new EnpoklepediaDependencyResolver(config.DependencyResolver)
+				.Add(typeof(PokemonController), () => new PokemonController(ctx));
 
 			// Web API routes
 			config.MapHttpAttributeRoutes();

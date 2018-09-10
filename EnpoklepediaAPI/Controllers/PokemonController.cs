@@ -4,24 +4,32 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using EnpoklepediaAPI.Typings;
+using EnpoklepediaAPI.Models;
 
 namespace EnpoklepediaAPI.Controllers
 {
     public class PokemonController : ApiController
     {
-		// GET api/pokemon
-		[HttpGet]
-		public IEnumerable<Pokemon> Get()
+		private readonly EnpoklepediaContext _ctx;
+
+		public PokemonController(EnpoklepediaContext ctx)
+			: base()
 		{
-			return new Pokemon[] { new Pokemon() };
+			_ctx = ctx;
 		}
 
-		// GET api/pokemon/ID
+		// GET api/pokemon
 		[HttpGet]
-		public Pokemon Get(Guid ID)
+		public List<Pokemon> Get()
 		{
-			return new Pokemon();
+			return _ctx.Pokemon.ToList();
+		}
+
+		// GET api/pokemon/number
+		[HttpGet]
+		public Pokemon Get(int number)
+		{
+			return _ctx.Pokemon.FirstOrDefault(p => p.Number == number);
 		}
     }
 }
